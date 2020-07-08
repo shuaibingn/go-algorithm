@@ -26,9 +26,6 @@ import (
 //var num int
 //
 //func reverse(x int) int {
-//	if x < math.MinInt32 || x > math.MaxInt32 {
-//		return 0
-//	}
 //	y := x % 10
 //	x = (x - y) / 10
 //	if x != 0 {
@@ -37,15 +34,26 @@ import (
 //	} else {
 //		num += y
 //	}
+//	if num < math.MinInt32 || num > math.MaxInt32 {
+//		return 0
+//	}
 //	return num
 //}
 
-
 func reverse(x int) int {
-
+	var num int
+	for x != 0 {
+		y := x % 10
+		x /= 10
+		num = num*10 + y
+	}
+	if num < math.MinInt32 || num > math.MaxInt32 {
+		return 0
+	}
+	return num
 }
 
 func main() {
-	a := reverse(-123)
+	a := reverse(1534236469)
 	fmt.Println(a)
 }
