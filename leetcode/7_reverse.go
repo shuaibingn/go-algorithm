@@ -43,8 +43,11 @@ import (
 func reverse(x int) int {
 	var num int
 	for x != 0 {
+		// 取余拿到最后一位数字
 		y := x % 10
+		// 取商拿到还未取余部分的数字
 		x /= 10
+		// 对位数进行乘10运算
 		num = num*10 + y
 	}
 	if num < math.MinInt32 || num > math.MaxInt32 {
