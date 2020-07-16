@@ -22,8 +22,7 @@ import "fmt"
 //		loop   bool
 //	)
 //	for _, v := range nums1 {
-//		i := findIndex(nums2, v)
-//		for ; i < len(nums2); i++ {
+//		for i := findIndex(nums2, v); i < len(nums2); i++ {
 //			if nums2[i] > v {
 //				result = append(result, nums2[i])
 //				loop = true
@@ -40,7 +39,24 @@ import "fmt"
 //}
 
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	var stack []int
+	m := make(map[int]int)
+	for _, v := range nums2 {
+		for len(stack) != 0 && stack[len(stack)-1] < v {
+			m[stack[len(stack)-1]] = v
+			stack = stack[:len(stack)-1]
+		}
+		stack = append(stack, v)
 
+	}
+	for len(stack) != 0 {
+		m[stack[len(stack)-1]] = -1
+		stack = stack[:len(stack)-1]
+	}
+	for i, v := range nums1 {
+		nums1[i] = m[v]
+	}
+	return nums1
 }
 
 func main() {
